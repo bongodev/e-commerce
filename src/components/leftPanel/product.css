@@ -1,0 +1,22 @@
+.product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: auto;
+    margin-top: 30px ;
+   
+    
+}
+.products {
+    border-width: 5px ;
+    border-style: solid;
+    border-color: black;
+}
+.b1 {
+    padding: 5px 10px ;
+    margin-bottom: 5px ;
+    cursor: pointer;
+    background-color: rgb(145, 16, 16);
+    color: white;
+    font-weight: bold;
+}
