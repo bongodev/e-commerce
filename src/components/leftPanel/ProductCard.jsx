@@ -1,4 +1,8 @@
-export function ProductCard({ product }) {
+export function ProductCard({ product, addProductToCart }) {
+  const handleAddProductToCart = () => {
+    addProductToCart(product);
+  };
+
   return (
     <div className="products">
       <img
@@ -8,7 +12,9 @@ export function ProductCard({ product }) {
       />
       <h5>{product.name}</h5>
       <h5>${product.price}</h5>
-      <button className="b1">Add to Cart</button>
+      <button className="b1" onClick={handleAddProductToCart}>
+        Add to Cart
+      </button>
     </div>
   );
 }

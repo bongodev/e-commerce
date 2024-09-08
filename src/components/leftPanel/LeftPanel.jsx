@@ -2,12 +2,12 @@ import { Filter } from './Filter';
 import { Heading } from './Heading';
 import { Product } from './Product';
 
-export function LeftPanel() {
+export function LeftPanel({ addProductToCart }) {
   return (
     <div>
       <Heading />
       <Filter />
-      <Product />
+      <Product addProductToCart={addProductToCart} />
     </div>
   );
 }

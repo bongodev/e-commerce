@@ -2,24 +2,74 @@ import { ProductCard } from './ProductCard';
 
 import './Product.css';
 
-export function Product() {
+export function Product({ addProductToCart }) {
   const products = [
-    { id: 1, name: 'Laptop', price: 899.99 },
-    { id: 2, name: 'Smartphone', price: 499.99 },
-    { id: 3, name: 'Headphones', price: 199.99 },
-    { id: 4, name: 'Keyboard', price: 99.99 },
-    { id: 5, name: 'Monitor', price: 299.99 },
-    { id: 6, name: 'Mouse', price: 49.99 },
-    { id: 7, name: 'Tablet', price: 399.99 },
-    { id: 8, name: 'Smartwatch', price: 149.99 },
-    { id: 9, name: 'Camera', price: 799.99 },
-    { id: 10, name: 'Speaker', price: 129.99 },
+    {
+      id: 1,
+      name: 'Gaming Laptop',
+      price: 1500,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Laptops', 'Gaming'],
+    },
+    {
+      id: 2,
+      name: 'Wireless Mouse',
+      price: 50,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Accessories', 'Peripherals'],
+    },
+    {
+      id: 3,
+      name: 'Mechanical Keyboard',
+      price: 100,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Accessories', 'Peripherals'],
+    },
+    {
+      id: 4,
+      name: 'External Hard Drive',
+      price: 120,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Storage', 'Accessories'],
+    },
+    {
+      id: 5,
+      name: 'Graphics Card',
+      price: 500,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Components', 'Gaming'],
+    },
+    {
+      id: 6,
+      name: 'Portable SSD',
+      price: 200,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Storage', 'Accessories'],
+    },
+    {
+      id: 7,
+      name: 'Gaming Monitor',
+      price: 300,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Monitors', 'Gaming'],
+    },
+    {
+      id: 8,
+      name: 'All-in-One Printer',
+      price: 150,
+      image: 'https://via.placeholder.com/150',
+      categories: ['Peripherals', 'Printers'],
+    },
   ];
 
   return (
     <div className="product-container">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          addProductToCart={addProductToCart}
+        />
       ))}
     </div>
   );
