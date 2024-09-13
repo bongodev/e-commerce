@@ -1,13 +1,13 @@
 import { Filter } from './Filter';
 import { Heading } from './Heading';
-import { Product } from './Product';
+import { Products } from '../product';
 
-export function LeftPanel({ addProductToCart }) {
+export function LeftPanel() {
   return (
     <div>
       <Heading />
       <Filter />
-      <Product addProductToCart={addProductToCart} />
+      <Products />
     </div>
   );
 }

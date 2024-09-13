@@ -1,8 +1,4 @@
-import { ProductCard } from './ProductCard';
-
-import './Product.css';
-
-export function Product({ addProductToCart }) {
+export const useProducts = () => {
   const products = [
     {
       id: 1,
@@ -62,15 +58,5 @@ export function Product({ addProductToCart }) {
     },
   ];
 
-  return (
-    <div className="product-container">
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          addProductToCart={addProductToCart}
-        />
-      ))}
-    </div>
-  );
-}
+  return { products };
+};
