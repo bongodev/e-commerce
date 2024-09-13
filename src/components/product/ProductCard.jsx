@@ -1,4 +1,10 @@
-export function ProductCard({ product, addProductToCart }) {
+import { useContext } from 'react';
+
+import { CartContext } from '../../contexts';
+
+export function ProductCard({ product }) {
+  const { addProductToCart } = useContext(CartContext);
+
   const handleAddProductToCart = () => {
     addProductToCart(product);
   };

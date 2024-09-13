@@ -1,12 +1,12 @@
-import { Cart } from './Cart';
+import { Cart } from '../cart';
 
-export function RightPanel({ cart, removeProductFromCart }) {
+export function RightPanel() {
   return (
     <div>
       <h2>Cart</h2>
       <button className="b1">CheckOut</button>
       <div>
-        <Cart cart={cart} removeProductFromCart={removeProductFromCart} />
+        <Cart />
       </div>
     </div>
   );
