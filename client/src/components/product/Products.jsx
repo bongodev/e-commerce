@@ -1,4 +1,4 @@
-import { useProducts } from '../../hooks';
+import { useProducts } from '../../api/queries';
 
 import { ProductCard } from './ProductCard';
 
