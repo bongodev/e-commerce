@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { ProductServices } from '../services';
 
@@ -6,7 +6,7 @@ export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
-  const loadProducts = async () => {
+  const loadProducts = useCallback(async () => {
     try {
       setIsLoading(true);
       const products = await ProductServices.getProducts();
@@ -17,11 +17,11 @@ export const useProducts = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadProducts();
-  }, []);
+  }, [loadProducts]);
 
   return { isLoading, products };
 };
