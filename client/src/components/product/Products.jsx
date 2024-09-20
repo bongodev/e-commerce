@@ -1,16 +1,14 @@
 import { useProducts } from '../../api/queries';
 
-import { Loading } from '../../common/components';
+import { Box, Loading } from '../../common/components';
 
 import { ProductCard } from './ProductCard';
-
-import './Products.css';
 
 export function Products() {
   const { isLoading, products } = useProducts();
 
   return (
-    <div className="product-container">
+    <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
       {isLoading ? (
         <Loading />
       ) : (
@@ -18,6 +16,6 @@ export function Products() {
           <ProductCard key={product.id} product={product} />
         ))
       )}
-    </div>
+    </Box>
   );
 }

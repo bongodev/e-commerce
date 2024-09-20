@@ -1,12 +1,20 @@
 import { Outlet } from 'react-router-dom';
 
+import { CartProvider } from '../contexts';
+
+import { Box, Stack } from '../common/components';
+
 import { AppBar } from '../components';
 
 export const Layout = () => {
   return (
-    <div className="layout">
-      <AppBar />
-      <Outlet />
-    </div>
+    <CartProvider>
+      <Stack spacing={4}>
+        <AppBar />
+        <Box display="flex" justifyContent="center">
+          <Outlet />
+        </Box>
+      </Stack>
+    </CartProvider>
   );
 };
