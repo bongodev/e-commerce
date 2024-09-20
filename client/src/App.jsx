@@ -1,18 +1,22 @@
-import { CartProvider } from './contexts';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { LeftPanel, RightPanel } from './components';
+import { Contact, HomePage } from './pages';
 
 import './App.css';
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <HomePage />,
+  },
+  {
+    path: '/contacts',
+    element: <Contact />,
+  },
+]);
+
 function App() {
-  return (
-    <CartProvider>
-      <div className="App">
-        <LeftPanel />
-        <RightPanel />
-      </div>
-    </CartProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
