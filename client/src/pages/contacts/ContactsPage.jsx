@@ -2,7 +2,7 @@ import React from 'react';
 
 import './ContactsPage.css';
 
-export function Contact() {
+export function ContactPage() {
   return (
     <div className="contact-container">
       <h2>Contact Us</h2>
