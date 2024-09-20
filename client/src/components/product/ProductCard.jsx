@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 
+import { AddBoxIcon } from '../../common/icons';
 import {
   Box,
   Button,
@@ -8,8 +9,7 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from '@mui/material';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+} from '../../common/components';
 
 import { CartContext } from '../../contexts';
 
