@@ -1,9 +1,9 @@
 .App {
   text-align: center;
   display: flex;
-  
-   justify-content: space-evenly;
+  justify-content: space-evenly;
 }
+
 .b2 {
   gap: 4px;
   border: none;
