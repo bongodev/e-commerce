@@ -1,4 +1,5 @@
-import React from 'react';
+import { IconButton, ListItemText } from '../../common/components';
+import { DeleteIcon } from '../../common/icons';
 
 export const CartItem = ({ cartItem, removeProductFromCart }) => {
   const handleRemoveProductFromCart = () => {
@@ -6,9 +7,18 @@ export const CartItem = ({ cartItem, removeProductFromCart }) => {
   };
 
   return (
-    <div className="cart-item">
-      <p>{`${cartItem.name} x ${cartItem.quantity}`}</p>
-      <button onClick={handleRemoveProductFromCart}>remove</button>
-    </div>
+    <>
+      <ListItemText
+        primary={`${cartItem.name} x ${cartItem.quantity}`}
+        secondary={`$${cartItem.price * cartItem.quantity}`}
+      />
+      <IconButton
+        onClick={handleRemoveProductFromCart}
+        variant="outlined"
+        color="error"
+      >
+        <DeleteIcon />
+      </IconButton>
+    </>
   );
 };

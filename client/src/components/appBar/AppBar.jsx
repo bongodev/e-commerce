@@ -1,13 +1,37 @@
-import React from 'react';
-import { Heading } from './Heading';
+import {
+  Box,
+  Button,
+  AppBar as MUIAppBar,
+  Toolbar,
+  Typography,
+} from '../../common/components';
+import { CartMenu } from './CartMenu';
+import { ProfileMenu } from './ProfileMenu';
 
 export const AppBar = () => {
   return (
-    <div>
-      <Heading />
+    <MUIAppBar position="sticky">
+      <Toolbar>
+        <Box display="flex" gap={10} flexGrow={1}>
+          <Typography variant="h6" component="div">
+            Simple E-commerce Website
+          </Typography>
 
-      <a href="/">Home</a>
-      <a href="/contacts">Contacts</a>
-    </div>
+          <Box display="flex" gap={2}>
+            <Button href="/" color="inherit">
+              Home
+            </Button>
+            <Button href="/contacts" color="inherit">
+              Contacts
+            </Button>
+          </Box>
+        </Box>
+
+        <Box display="flex" gap={2}>
+          <CartMenu />
+          <ProfileMenu />
+        </Box>
+      </Toolbar>
+    </MUIAppBar>
   );
 };

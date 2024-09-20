@@ -1,3 +1,3 @@
-export * from './leftPanel';
-export * from './rightPanel/RightPanel';
+export * from './Filter';
+export * from './product/Products';
 export * from './appBar/AppBar';

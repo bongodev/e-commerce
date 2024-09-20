@@ -8,10 +8,16 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Tooltip,
   Typography,
 } from '../../common/components';
 
 import { CartContext } from '../../contexts';
+
+const mockDescription = ` In publishing and graphic design, Lorem ipsum is a placeholder text
+          commonly used to demonstrate the visual form of a document or a
+          typeface without relying on meaningful content. Lorem ipsum may be
+          used as a placeholder before the final copy is available. Wikipedia`;
 
 export function ProductCard({ product }) {
   const { addProductToCart } = useContext(CartContext);
@@ -27,19 +33,21 @@ export function ProductCard({ product }) {
         image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dyT8FEm-Khi_NBX4-sYdtIUo8EOmxe62eQ&s"
         title={product.name}
       />
-      <CardContent>
-        <Box display="flex" justifyContent="space-between">
-          <Typography gutterBottom variant="h5" component="div">
-            {product.name}
-          </Typography>
+      <CardContent sx={{ height: 200 }}>
+        <Box display="flex" justifyContent="space-between" gap={4}>
+          <Tooltip title={product.name}>
+            <Typography gutterBottom variant="h5" component="div" noWrap>
+              {product.name}
+            </Typography>
+          </Tooltip>
+
           <Typography variant="h5">${product.price}</Typography>
         </Box>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          In publishing and graphic design, Lorem ipsum is a placeholder text
-          commonly used to demonstrate the visual form of a document or a
-          typeface without relying on meaningful content. Lorem ipsum may be
-          used as a placeholder before the final copy is available. Wikipedia
-        </Typography>
+        <Tooltip title={mockDescription}>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {mockDescription}
+          </Typography>
+        </Tooltip>
       </CardContent>
       <CardActions>
         <Button size="small" variant="outlined">

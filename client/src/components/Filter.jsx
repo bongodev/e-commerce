@@ -1,3 +1,5 @@
+import { Box, Button } from '../common/components';
+
 export function Filter() {
   const categories = [
     'Laptops',
@@ -12,12 +14,10 @@ export function Filter() {
   ];
 
   return (
-    <div>
+    <Box display="flex" gap={1} flexWrap="wrap">
       {categories.map((category, index) => (
-        <button className="b2" key={index}>
-          {category}
-        </button>
+        <Button key={index}>{category}</Button>
       ))}
-    </div>
+    </Box>
   );
 }
