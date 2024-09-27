@@ -22,12 +22,16 @@ import {
   Menu,
   MenuItem,
   MenuList,
+  LinearProgress,
+  CircularProgress,
 } from '@mui/material';
 
 import { DataGrid } from '@mui/x-data-grid';
 
 export * from './Loading';
 export * from './FlexBox';
+export * from './TableEmptyState';
+
 export {
   Box,
   Button,
@@ -53,4 +57,6 @@ export {
   MenuItem,
   MenuList,
   DataGrid as Table,
+  LinearProgress,
+  CircularProgress,
 };
