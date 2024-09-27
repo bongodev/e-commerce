@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,
@@ -28,6 +29,7 @@ export * from './FlexBox';
 export {
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,

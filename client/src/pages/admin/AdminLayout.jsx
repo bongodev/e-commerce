@@ -1,17 +1,29 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Stack,
+  Typography,
+} from '../../common/components';
+
 export const AdminLayout = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>Welcome Admin!</h1>
-      <div>
-        <button onClick={() => navigate('/admin')}>Dashboard</button>
-        <button onClick={() => navigate('/admin/inventory')}>Inventory</button>
-        <button onClick={() => navigate('/admin/profile')}>Profile</button>
-      </div>
+    <Stack width={1} px={4} spacing={2}>
+      <Typography variant="h1">Welcome Admin!</Typography>
+      <Box>
+        <ButtonGroup>
+          <Button onClick={() => navigate('/admin')}>Dashboard</Button>
+          <Button onClick={() => navigate('/admin/inventory')}>
+            Inventory
+          </Button>
+          <Button onClick={() => navigate('/admin/profile')}>Profile</Button>
+        </ButtonGroup>
+      </Box>
       <Outlet />
-    </div>
+    </Stack>
   );
 };
