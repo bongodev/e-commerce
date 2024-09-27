@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 
 export * from './Loading';
+export * from './FlexBox';
 export {
   Box,
   Button,
