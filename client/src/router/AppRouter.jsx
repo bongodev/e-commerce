@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import {
   AdminLayout,
   ContactPage,
+  InventoryPage,
   Layout,
   LoginPage,
   ProductsPage,
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'inventory',
-            element: <div>Product inventory</div>,
+            element: <InventoryPage />,
           },
           {
             path: 'profile',

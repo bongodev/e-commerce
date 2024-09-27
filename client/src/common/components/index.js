@@ -24,6 +24,8 @@ import {
   MenuList,
 } from '@mui/material';
 
+import { DataGrid } from '@mui/x-data-grid';
+
 export * from './Loading';
 export * from './FlexBox';
 export {
@@ -50,4 +52,5 @@ export {
   Menu,
   MenuItem,
   MenuList,
+  DataGrid as Table,
 };
