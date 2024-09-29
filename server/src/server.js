@@ -130,7 +130,7 @@ app.put('/api/products/:id', (req, res) => {
   product.quantity = req.body.quantity || product.quantity;
   product.price = req.body.price || product.price;
   product.vendor = req.body.vendor || product.vendor;
-  product.category = req.body.category || product.category;
+  product.categories = req.body.categories || product.categories;
 
   res.json(product);
 });
