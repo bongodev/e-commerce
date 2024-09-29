@@ -2,10 +2,14 @@ import { useState } from 'react';
 
 import { Box, Button, Modal, Stack } from '../../common/components';
 
-import { ProductFrom, ProductTable } from '../../components';
 import { ProductServices } from '../../api/services';
+import { useProducts } from '../../api/queries';
+
+import { ProductFrom, ProductTable } from '../../components';
 
 export const InventoryPage = () => {
+  const { isLoading, products } = useProducts();
+
   const [openProductFrom, setOpenProductForm] = useState(false);
 
   const toggleProductFrom = () => setOpenProductForm((prev) => !prev);
@@ -24,7 +28,7 @@ export const InventoryPage = () => {
       <Box display="flex" justifyContent="flex-end">
         <Button onClick={toggleProductFrom}>Add Product</Button>
       </Box>
-      <ProductTable />
+      <ProductTable isLoading={isLoading} products={products} />
 
       <Modal open={openProductFrom} onClose={toggleProductFrom}>
         <Box
