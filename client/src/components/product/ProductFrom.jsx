@@ -15,7 +15,7 @@ const productPlaceholder = {
   categories: [],
 };
 
-export const ProductFrom = ({ onSubmitProductFrom }) => {
+export const ProductFrom = ({ onSubmitProductFrom, isSubmitting }) => {
   const [error, setErrors] = useState({});
   const [product, setProduct] = useState(productPlaceholder);
 
@@ -73,7 +73,7 @@ export const ProductFrom = ({ onSubmitProductFrom }) => {
           <Button color="error" variant="outlined" type="reset">
             Cancel
           </Button>
-          <Button variant="outlined" type="submit">
+          <Button variant="outlined" type="submit" disabled={isSubmitting}>
             Add
           </Button>
         </Box>

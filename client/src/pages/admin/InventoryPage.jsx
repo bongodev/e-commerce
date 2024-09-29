@@ -2,25 +2,19 @@ import { useState } from 'react';
 
 import { Box, Button, Modal, Stack } from '../../common/components';
 
-import { ProductServices } from '../../api/services';
 import { useProducts } from '../../api/queries';
 
 import { ProductFrom, ProductTable } from '../../components';
 
 export const InventoryPage = () => {
-  const { isLoading, products } = useProducts();
+  const { isLoading, isSubmitting, addProduct, products } = useProducts();
 
   const [openProductFrom, setOpenProductForm] = useState(false);
 
   const toggleProductFrom = () => setOpenProductForm((prev) => !prev);
 
   const onSubmitProductFrom = (productPayload) => {
-    ProductServices.addProduct(productPayload)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch(() => alert('Failed to add product'))
-      .finally(() => setOpenProductForm(false));
+    addProduct(productPayload).finally(() => setOpenProductForm(false));
   };
 
   return (
@@ -35,7 +29,10 @@ export const InventoryPage = () => {
           width={8 / 12}
           sx={{ bgcolor: 'background.paper', mx: 'auto', my: '10%' }}
         >
-          <ProductFrom onSubmitProductFrom={onSubmitProductFrom} />
+          <ProductFrom
+            isSubmitting={isSubmitting}
+            onSubmitProductFrom={onSubmitProductFrom}
+          />
         </Box>
       </Modal>
     </Stack>
