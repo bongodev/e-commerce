@@ -4,7 +4,21 @@ import { ProductServices } from '../services';
 
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [products, setProducts] = useState([]);
+
+  const addProduct = async (productPayload) => {
+    setIsSubmitting(true);
+    try {
+      const product = await ProductServices.addProduct(productPayload);
+      setProducts([product, ...products]);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to add product');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const loadProducts = useCallback(async () => {
     try {
@@ -23,5 +37,5 @@ export const useProducts = () => {
     loadProducts();
   }, [loadProducts]);
 
-  return { isLoading, products };
+  return { isLoading, isSubmitting, addProduct, products };
 };
