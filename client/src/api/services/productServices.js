@@ -4,3 +4,8 @@ export const getProducts = async () => {
   const response = await http.get('/api/products');
   return response.data;
 };
+
+export const addProduct = async (productPayload) => {
+  const response = await http.post('/api/products', productPayload);
+  return response.data;
+};

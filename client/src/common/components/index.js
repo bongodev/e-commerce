@@ -24,6 +24,8 @@ import {
   MenuList,
   LinearProgress,
   CircularProgress,
+  Modal,
+  TextField,
 } from '@mui/material';
 
 import { DataGrid } from '@mui/x-data-grid';
@@ -59,4 +61,6 @@ export {
   DataGrid as Table,
   LinearProgress,
   CircularProgress,
+  Modal,
+  TextField,
 };
