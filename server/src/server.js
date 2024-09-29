@@ -112,7 +112,7 @@ app.post('/api/products', (req, res) => {
     quantity: req.body.quantity,
     price: req.body.price,
     vendor: req.body.vendor,
-    category: req.body.category,
+    categories: req.body.categories,
   };
 
   products.push(newProduct);
