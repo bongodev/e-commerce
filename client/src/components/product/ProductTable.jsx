@@ -6,8 +6,6 @@ import {
 } from '../../common/components';
 import { DeleteIcon, EditIcon, SettingsIcon } from '../../common/icons';
 
-import { useProducts } from '../../api/queries';
-
 const ProductRowActions = ({ row }) => {
   return (
     <Box>
@@ -21,9 +19,7 @@ const ProductRowActions = ({ row }) => {
   );
 };
 
-export const ProductTable = () => {
-  const { isLoading, products } = useProducts();
-
+export const ProductTable = ({ isLoading, products }) => {
   const getFormattedRows = () =>
     products.map((product) => ({
       id: product.id,
@@ -63,7 +59,7 @@ export const ProductTable = () => {
             minWidth: 200,
             renderCell: ProductRowActions,
             renderHeader: () => <SettingsIcon />,
-            sortable: false,  
+            sortable: false,
           },
         ]}
         rows={getFormattedRows()}
