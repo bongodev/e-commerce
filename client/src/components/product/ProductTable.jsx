@@ -6,20 +6,29 @@ import {
 } from '../../common/components';
 import { DeleteIcon, EditIcon, SettingsIcon } from '../../common/icons';
 
-const ProductRowActions = ({ product, onSelectProduct }) => {
+const ProductRowActions = ({ product, onSelectProduct, onDeleteProduct }) => {
   return (
     <Box>
       <IconButton size="small" onClick={() => onSelectProduct(product)}>
         <EditIcon />
       </IconButton>
-      <IconButton size="small" color="error">
+      <IconButton
+        size="small"
+        color="error"
+        onClick={() => onDeleteProduct(product.id)}
+      >
         <DeleteIcon />
       </IconButton>
     </Box>
   );
 };
 
-export const ProductTable = ({ isLoading, products, onSelectProduct }) => {
+export const ProductTable = ({
+  isLoading,
+  products,
+  onSelectProduct,
+  onDeleteProduct,
+}) => {
   const getFormattedRows = () =>
     products.map((product) => ({
       id: product.id,
@@ -62,6 +71,7 @@ export const ProductTable = ({ isLoading, products, onSelectProduct }) => {
               <ProductRowActions
                 product={row.data}
                 onSelectProduct={onSelectProduct}
+                onDeleteProduct={onDeleteProduct}
               />
             ),
             renderHeader: () => <SettingsIcon />,

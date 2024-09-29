@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-import { Box, Button, Modal, Stack } from '../../common/components';
+import {
+  Box,
+  Button,
+  ConfirmationModal,
+  Modal,
+  Stack,
+} from '../../common/components';
 
 import { useProducts } from '../../api/queries';
 
@@ -15,8 +21,16 @@ const productPlaceholder = {
 };
 
 export const InventoryPage = () => {
+  const {
+    isLoading,
+    isSubmitting,
+    isDeleting,
+    upsertProduct,
+    deleteProduct,
+    products,
+  } = useProducts();
   const [selectedProduct, setSelectedProduct] = useState(productPlaceholder);
-  const { isLoading, isSubmitting, upsertProduct, products } = useProducts();
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
 
   const [openProductFrom, setOpenProductForm] = useState(false);
 
@@ -31,6 +45,10 @@ export const InventoryPage = () => {
     upsertProduct(productPayload).finally(() => closeProductForm());
   };
 
+  const handleProductDelete = (productId) => {
+    deleteProduct(productId).finally(() => setProductIdToDelete(null));
+  };
+
   const shouldOpenEditForm = Boolean(selectedProduct.id);
 
   return (
@@ -42,6 +60,7 @@ export const InventoryPage = () => {
         isLoading={isLoading}
         products={products}
         onSelectProduct={setSelectedProduct}
+        onDeleteProduct={setProductIdToDelete}
       />
 
       <Modal
@@ -59,6 +78,15 @@ export const InventoryPage = () => {
           />
         </Box>
       </Modal>
+
+      <ConfirmationModal
+        open={Boolean(productIdToDelete)}
+        disabled={isDeleting}
+        onClose={() => setProductIdToDelete(null)}
+        onConfirm={() => handleProductDelete(productIdToDelete)}
+        title="Are you sure!"
+        content="This product will be deleted forever."
+      />
     </Stack>
   );
 };
