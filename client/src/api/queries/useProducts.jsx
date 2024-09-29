@@ -7,11 +7,26 @@ export const useProducts = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [products, setProducts] = useState([]);
 
-  const addProduct = async (productPayload) => {
+  const upsertProduct = async (productPayload) => {
+    const isEditing = Boolean(productPayload.id);
     setIsSubmitting(true);
     try {
-      const product = await ProductServices.addProduct(productPayload);
-      setProducts([product, ...products]);
+      if (isEditing) {
+        const updatedProduct = await ProductServices.updateProduct({
+          productId: productPayload.id,
+          productPayload,
+        });
+        const productIndex = products.findIndex(
+          (product) => product.id === updatedProduct.id
+        );
+        if (productIndex !== -1) {
+          products[productIndex] = updatedProduct;
+          setProducts([...products]);
+        }
+      } else {
+        const newProduct = await ProductServices.addProduct(productPayload);
+        setProducts([newProduct, ...products]);
+      }
     } catch (err) {
       console.error(err);
       alert('Failed to add product');
@@ -37,5 +52,5 @@ export const useProducts = () => {
     loadProducts();
   }, [loadProducts]);
 
-  return { isLoading, isSubmitting, addProduct, products };
+  return { isLoading, isSubmitting, upsertProduct, products };
 };

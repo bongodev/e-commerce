@@ -7,15 +7,11 @@ import {
   Typography,
 } from '../../common/components';
 
-const productPlaceholder = {
-  id: '',
-  name: '',
-  price: 0,
-  quantity: 0,
-  categories: [],
-};
-
-export const ProductFrom = ({ onSubmitProductFrom, isSubmitting }) => {
+export const ProductFrom = ({
+  productPlaceholder,
+  onSubmitProductFrom,
+  isSubmitting,
+}) => {
   const [error, setErrors] = useState({});
   const [product, setProduct] = useState(productPlaceholder);
 
@@ -41,6 +37,8 @@ export const ProductFrom = ({ onSubmitProductFrom, isSubmitting }) => {
     onSubmitProductFrom(product);
   };
 
+  const isEditing = Boolean(productPlaceholder.id);
+
   return (
     <form onSubmit={handleOnSubmitProductForm}>
       <Stack spacing={2} px={8} py={6}>
@@ -52,6 +50,7 @@ export const ProductFrom = ({ onSubmitProductFrom, isSubmitting }) => {
           name="name"
           error={Boolean(error.name)}
           onChange={handleOnChange}
+          value={product.name}
         />
         <TextField
           required
@@ -60,6 +59,7 @@ export const ProductFrom = ({ onSubmitProductFrom, isSubmitting }) => {
           name="price"
           error={Boolean(error.price)}
           onChange={handleOnChange}
+          value={product.price}
         />
         <TextField
           required
@@ -68,13 +68,14 @@ export const ProductFrom = ({ onSubmitProductFrom, isSubmitting }) => {
           name="quantity"
           error={Boolean(error.quantity)}
           onChange={handleOnChange}
+          value={product.quantity}
         />
         <Box display="flex" justifyContent="flex-end" gap={4}>
           <Button color="error" variant="outlined" type="reset">
             Cancel
           </Button>
           <Button variant="outlined" type="submit" disabled={isSubmitting}>
-            Add
+            {isEditing ? 'Edit' : 'Add'}
           </Button>
         </Box>
       </Stack>
