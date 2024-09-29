@@ -5,6 +5,7 @@ import { ProductServices } from '../services';
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [products, setProducts] = useState([]);
 
   const upsertProduct = async (productPayload) => {
@@ -35,6 +36,19 @@ export const useProducts = () => {
     }
   };
 
+  const deleteProduct = async (productId) => {
+    try {
+      setIsDeleting(true);
+      await ProductServices.deleteProduct(productId);
+      setProducts(products.filter((product) => product.id !== productId));
+    } catch (error) {
+      console.error(error);
+      alert('Failed to delete product');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const loadProducts = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -52,5 +66,12 @@ export const useProducts = () => {
     loadProducts();
   }, [loadProducts]);
 
-  return { isLoading, isSubmitting, upsertProduct, products };
+  return {
+    isLoading,
+    isSubmitting,
+    isDeleting,
+    upsertProduct,
+    deleteProduct,
+    products,
+  };
 };

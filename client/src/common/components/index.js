@@ -26,6 +26,11 @@ import {
   CircularProgress,
   Modal,
   TextField,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  DialogContentText,
 } from '@mui/material';
 
 import { DataGrid } from '@mui/x-data-grid';
@@ -33,6 +38,7 @@ import { DataGrid } from '@mui/x-data-grid';
 export * from './Loading';
 export * from './FlexBox';
 export * from './TableEmptyState';
+export * from './ConfirmationModal';
 
 export {
   Box,
@@ -63,4 +69,9 @@ export {
   CircularProgress,
   Modal,
   TextField,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  DialogContentText,
 };
