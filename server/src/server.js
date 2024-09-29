@@ -86,14 +86,16 @@ app.get('/api/products', (req, res) => {
     filters = category.map((category) => category.toLowerCase());
   }
   if (!filters.length) {
-    res.json(products);
+    res.json(products.sort((a, b) => b.id - a.id));
   }
   res.json(
-    products.filter((product) =>
-      product.categories.some((category) =>
-        filters.includes(category.toLowerCase())
+    products
+      .filter((product) =>
+        product.categories.some((category) =>
+          filters.includes(category.toLowerCase())
+        )
       )
-    )
+      .sort((a, b) => b.id - a.id)
   );
 });
 
@@ -107,7 +109,7 @@ app.get('/api/products/:id', (req, res) => {
 // Create a new product
 app.post('/api/products', (req, res) => {
   const newProduct = {
-    id: products.length ? products[products.length - 1].id + 1 : 1,
+    id: products.reduce((max, cur) => Math.max(max, cur.id), 0) + 1,
     name: req.body.name,
     quantity: req.body.quantity,
     price: req.body.price,
