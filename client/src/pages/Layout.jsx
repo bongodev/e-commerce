@@ -11,7 +11,7 @@ export const Layout = () => {
     <CartProvider>
       <Stack spacing={4}>
         <AppBar />
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" width={1}>
           <Outlet />
         </Box>
       </Stack>

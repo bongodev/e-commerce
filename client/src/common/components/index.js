@@ -31,6 +31,7 @@ import {
   DialogTitle,
   DialogActions,
   DialogContentText,
+  Container,
 } from '@mui/material';
 
 import { DataGrid } from '@mui/x-data-grid';
@@ -74,4 +75,5 @@ export {
   DialogTitle,
   DialogActions,
   DialogContentText,
+  Container,
 };
