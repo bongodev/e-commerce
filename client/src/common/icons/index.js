@@ -6,6 +6,7 @@ import HourglassDisabledIcon from '@mui/icons-material/HourglassDisabled';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import EditIcon from '@mui/icons-material/Edit';
 import SettingsIcon from '@mui/icons-material/Settings';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export {
   AddBoxIcon,
@@ -16,4 +17,5 @@ export {
   SearchOffIcon,
   EditIcon,
   SettingsIcon,
+  MenuIcon,
 };

@@ -6,6 +6,7 @@ import {
   Typography,
 } from '../../common/components';
 import { CartMenu } from './CartMenu';
+import { MobileMenus } from './MobileMenus';
 import { ProfileMenu } from './ProfileMenu';
 
 export const AppBar = () => {
@@ -13,11 +14,19 @@ export const AppBar = () => {
     <MUIAppBar position="sticky">
       <Toolbar>
         <Box display="flex" gap={10} flexGrow={1}>
-          <Typography variant="h6" component="div">
+          <Typography
+            variant="h6"
+            component="div"
+            display={{ sm: 'none', xs: 'none', md: 'block' }}
+          >
             Simple E-commerce Website
           </Typography>
+          <MobileMenus />
 
-          <Box display="flex" gap={2}>
+          <Box
+            display={{ sm: 'none', xs: 'none', md: 'flex', lg: 'flex' }}
+            gap={2}
+          >
             <Button href="/" color="inherit">
               Home
             </Button>
