@@ -14,13 +14,16 @@ export const AppBar = () => {
     <MUIAppBar position="sticky">
       <Toolbar>
         <Box display="flex" gap={10} flexGrow={1}>
-          <Typography
-            variant="h6"
-            component="div"
-            display={{ sm: 'none', xs: 'none', md: 'block' }}
+          <Box
+            display={{ sm: 'none', xs: 'none', md: 'flex' }}
+            justifyContent="center"
           >
-            Simple E-commerce Website
-          </Typography>
+            <img
+              src={process.env.PUBLIC_URL + '/logo-bongoDev.svg'}
+              alt="BongoDev Simple E-Commerce App"
+              height="32px"
+            />
+          </Box>
           <MobileMenus />
 
           <Box
