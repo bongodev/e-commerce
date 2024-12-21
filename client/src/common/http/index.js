@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+import { appConfig } from '../config';
+
 export const http = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: appConfig.BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
