@@ -32,6 +32,9 @@ import {
   DialogActions,
   DialogContentText,
   Container,
+  Tabs,
+  Tab,
+  InputAdornment,
 } from '@mui/material';
 
 import { DataGrid } from '@mui/x-data-grid';
@@ -76,4 +79,7 @@ export {
   DialogActions,
   DialogContentText,
   Container,
+  Tab,
+  Tabs,
+  InputAdornment,
 };

@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
+import { Container, Tabs, Tab, Box, Typography } from '../../common/components';
+import { LoginForm, SignupForm } from '../../components';
 
 export function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [activeTab, setActiveTab] = useState(0);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically handle the login logic,
-    // such as making an API request to authenticate the user
-    console.log('Email:', email);
-    console.log('Password:', password);
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 8, textAlign: 'center' }}>
+      <Typography variant="h4" gutterBottom>
+        Simple E-Commerce
+      </Typography>
+      <Tabs value={activeTab} onChange={handleTabChange} centered>
+        <Tab label="Login" />
+        <Tab label="Sign Up" />
+      </Tabs>
+      <Box sx={{ mt: 2 }}>
+        {activeTab === 0 ? (
+          <LoginForm />
+        ) : (
+          <SignupForm onSignUpComplete={() => setActiveTab(0)} />
+        )}
+      </Box>
+    </Container>
   );
 }
