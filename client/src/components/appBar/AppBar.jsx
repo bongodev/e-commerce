@@ -1,3 +1,4 @@
+import { authServices } from '../../auth';
 import {
   Box,
   Button,
@@ -9,7 +10,8 @@ import { MobileMenus } from './MobileMenus';
 import { ProfileMenu } from './ProfileMenu';
 
 export const AppBar = () => {
-  const isUserLoggedIn = false;
+  const isUserLoggedIn = authServices.isUserLoggedIn();
+
   return (
     <MUIAppBar position="sticky">
       <Toolbar>
