@@ -3,8 +3,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import { appConfig } from './config/index.js';
+import connectDB from './db.js';
 
 const app = express();
+
+connectDB();
 
 app.use(bodyParser.json());
 app.use(
