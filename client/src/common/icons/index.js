@@ -7,6 +7,7 @@ import SearchOffIcon from '@mui/icons-material/SearchOff';
 import EditIcon from '@mui/icons-material/Edit';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export {
   AddBoxIcon,
@@ -18,4 +19,6 @@ export {
   EditIcon,
   SettingsIcon,
   MenuIcon,
+  Visibility,
+  VisibilityOff,
 };

@@ -1,12 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+
+import { appConfig } from './config/index.js';
+import connectDB from './db.js';
+import configureRoutes from './routes/index.js';
+import { authenticateToken } from './middlewares/index.js';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
+connectDB();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: appConfig.ALLOWED_ORIGIN,
+  })
+);
+
+configureRoutes(app);
 
 // In-memory array to store products
 let products = [
@@ -77,7 +89,7 @@ let products = [
 ];
 
 // Get all products
-app.get('/api/products', (req, res) => {
+app.get('/api/products', authenticateToken, (req, res) => {
   const { category } = req.query;
   let filters = [];
   if (typeof category === 'string') {
@@ -136,7 +148,7 @@ app.put('/api/products/:id', (req, res) => {
 });
 
 // Delete a product
-app.delete('/api/products/:id', (req, res) => {
+app.delete('/api/products/:id', authenticateToken, (req, res) => {
   const productIndex = products.findIndex(
     (p) => p.id === parseInt(req.params.id)
   );
@@ -174,6 +186,6 @@ app.get('/api/search', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(appConfig.PORT, () => {
+  console.log(`Server is running on port ${appConfig.PORT}`);
 });

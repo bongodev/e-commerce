@@ -1,15 +1,17 @@
+import { authServices } from '../../auth';
 import {
   Box,
   Button,
   AppBar as MUIAppBar,
   Toolbar,
-  Typography,
 } from '../../common/components';
 import { CartMenu } from './CartMenu';
 import { MobileMenus } from './MobileMenus';
 import { ProfileMenu } from './ProfileMenu';
 
 export const AppBar = () => {
+  const isUserLoggedIn = authServices.isUserLoggedIn();
+
   return (
     <MUIAppBar position="sticky">
       <Toolbar>
@@ -41,7 +43,13 @@ export const AppBar = () => {
 
         <Box display="flex" gap={2}>
           <CartMenu />
-          <ProfileMenu />
+          {isUserLoggedIn ? (
+            <ProfileMenu />
+          ) : (
+            <Button href="/login" color="inherit" variant="outlined">
+              Login
+            </Button>
+          )}
         </Box>
       </Toolbar>
     </MUIAppBar>

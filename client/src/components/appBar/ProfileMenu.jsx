@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
+  Box,
   Button,
+  ConfirmationModal,
+  Divider,
   IconButton,
   Menu,
   MenuItem,
 } from '../../common/components';
+import { authServices } from '../../auth';
 
 const menu = [
   {
@@ -23,7 +28,9 @@ const menu = [
 ];
 
 export const ProfileMenu = () => {
+  const navigate = useNavigate();
   const [openAdminMenu, setOpenAdminMenu] = useState(false);
+  const [confirmLogout, setConfirmLogout] = useState(false);
 
   const toggleAdminMenu = () => setOpenAdminMenu((prev) => !prev);
 
@@ -46,7 +53,22 @@ export const ProfileMenu = () => {
             <Button href={menu.path}>{menu.name}</Button>
           </MenuItem>
         ))}
+        <Divider />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button color="error" onClick={() => setConfirmLogout(true)}>
+            Logout
+          </Button>
+        </Box>
       </Menu>
+      <ConfirmationModal
+        title={'Are you sure?'}
+        open={confirmLogout}
+        onClose={() => setConfirmLogout(false)}
+        onConfirm={() => {
+          authServices.logout();
+          navigate('/login');
+        }}
+      />
     </>
   );
 };
