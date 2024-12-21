@@ -5,6 +5,7 @@ import cors from 'cors';
 import { appConfig } from './config/index.js';
 import connectDB from './db.js';
 import configureRoutes from './routes/index.js';
+import { authenticateToken } from './middlewares/index.js';
 
 const app = express();
 
@@ -88,7 +89,7 @@ let products = [
 ];
 
 // Get all products
-app.get('/api/products', (req, res) => {
+app.get('/api/products', authenticateToken, (req, res) => {
   const { category } = req.query;
   let filters = [];
   if (typeof category === 'string') {
@@ -147,7 +148,7 @@ app.put('/api/products/:id', (req, res) => {
 });
 
 // Delete a product
-app.delete('/api/products/:id', (req, res) => {
+app.delete('/api/products/:id', authenticateToken, (req, res) => {
   const productIndex = products.findIndex(
     (p) => p.id === parseInt(req.params.id)
   );

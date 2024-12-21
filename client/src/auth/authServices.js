@@ -9,6 +9,10 @@ const getAuthUser = (authUser) =>
 
 export const isUserLoggedIn = () => Boolean(getAuthUser());
 
+export const getAccessToken = () => getAuthUser().accessToken;
+
+export const getRefreshToken = () => getAuthUser().refreshToken;
+
 export const signup = ({ fname, lname, email, password }) =>
   axios.post(`${appConfig.BASE_URL}/api/users/sign-up`, {
     fname,
@@ -17,16 +21,18 @@ export const signup = ({ fname, lname, email, password }) =>
     password,
   });
 
-export const login = async ({ type, email, password }) => {
-  const res = (
+export const login = async ({ type, email, password, refreshToken }) => {
+  const authUser = (
     await axios.post(`${appConfig.BASE_URL}/api/users/login`, {
       type,
       email,
       password,
+      refreshToken,
     })
   ).data;
 
-  saveAuthUser(res);
+  saveAuthUser(authUser);
+  return authUser;
 };
 
 export const logout = () => {
