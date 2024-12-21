@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import { appConfig } from './config/index.js';
 import connectDB from './db.js';
+import configureRoutes from './routes/index.js';
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(
     origin: appConfig.ALLOWED_ORIGIN,
   })
 );
+
+configureRoutes(app);
 
 // In-memory array to store products
 let products = [
