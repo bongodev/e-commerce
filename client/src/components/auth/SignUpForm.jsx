@@ -36,6 +36,11 @@ export function SignupForm({ onSignUpComplete }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.honeypot) {
+      console.warn('Honeypot triggered. Potential bot submission.');
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match!');
       return;
@@ -46,6 +51,7 @@ export function SignupForm({ onSignUpComplete }) {
       lname: formData.lname,
       email: formData.email,
       password: formData.password,
+      honeypot: '', // Honeypot field
     };
 
     authServices
@@ -123,6 +129,17 @@ export function SignupForm({ onSignUpComplete }) {
             </InputAdornment>
           ),
         }}
+      />
+      {/* Honeypot field - hidden from users */}
+      <TextField
+        fullWidth
+        label="Leave this field empty"
+        name="honeypot"
+        type="text"
+        margin="normal"
+        value={formData.honeypot}
+        onChange={handleChange}
+        style={{ display: 'none' }}
       />
       <Button
         fullWidth
