@@ -171,7 +171,7 @@ function generateTokens(user) {
     },
     appConfig.AUTH.JWT_SECRET,
     {
-      expiresIn: '1d',
+      expiresIn: '5m',
     }
   );
   const refreshToken = jwt.sign(
@@ -181,7 +181,7 @@ function generateTokens(user) {
     },
     appConfig.AUTH.JWT_SECRET,
     {
-      expiresIn: '30d',
+      expiresIn: '7d',
     }
   );
   return { accessToken, refreshToken };
