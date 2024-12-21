@@ -1,15 +1,17 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import { appConfig } from './config/index.js';
+
 const app = express();
-const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: appConfig.ALLOWED_ORIGIN,
+  })
+);
 
 // In-memory array to store products
 let products = [
@@ -177,6 +179,6 @@ app.get('/api/search', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(appConfig.PORT, () => {
+  console.log(`Server is running on port ${appConfig.PORT}`);
 });
