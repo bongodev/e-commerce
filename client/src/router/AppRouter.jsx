@@ -8,6 +8,7 @@ import {
   LoginPage,
   ProductsPage,
 } from '../pages';
+import SecureRoute from './SecureRoute';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'admin',
-        element: <AdminLayout />,
+        element: (
+          <SecureRoute>
+            <AdminLayout />
+          </SecureRoute>
+        ),
         children: [
           {
             index: true,
