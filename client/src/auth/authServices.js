@@ -28,3 +28,7 @@ export const login = async ({ type, email, password }) => {
 
   saveAuthUser(res);
 };
+
+export const logout = () => {
+  localStorage.removeItem(appConfig.CURRENT_USER_KEY);
+};
