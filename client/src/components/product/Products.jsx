@@ -1,18 +1,20 @@
-import { useProducts } from '../../api/queries';
+import { useProductQuery } from '../../api/queries';
 
 import { Box, Loading } from '../../common/components';
 
 import { ProductCard } from './ProductCard';
 
 export function Products() {
-  const { isLoading, products } = useProducts();
+  const { productQuery } = useProductQuery();
+
+  console.log(productQuery.data);
 
   return (
     <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-      {isLoading ? (
+      {productQuery.isLoading ? (
         <Loading />
       ) : (
-        products.map((product) => (
+        (productQuery.data || []).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))
       )}

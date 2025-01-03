@@ -89,7 +89,7 @@ let products = [
 ];
 
 // Get all products
-app.get('/api/products', authenticateToken, (req, res) => {
+app.get('/api/products', (req, res) => {
   const { category } = req.query;
   let filters = [];
   if (typeof category === 'string') {

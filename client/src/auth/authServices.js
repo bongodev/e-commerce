@@ -4,14 +4,14 @@ import { appConfig } from '../common/config';
 const saveAuthUser = (authUser) =>
   localStorage.setItem(appConfig.CURRENT_USER_KEY, JSON.stringify(authUser));
 
-const getAuthUser = (authUser) =>
+const getAuthUser = () =>
   JSON.parse(localStorage.getItem(appConfig.CURRENT_USER_KEY));
 
 export const isUserLoggedIn = () => Boolean(getAuthUser());
 
-export const getAccessToken = () => getAuthUser().accessToken;
+export const getAccessToken = () => getAuthUser()?.accessToken;
 
-export const getRefreshToken = () => getAuthUser().refreshToken;
+export const getRefreshToken = () => getAuthUser()?.refreshToken;
 
 export const signup = ({ fname, lname, email, password }) =>
   axios.post(`${appConfig.BASE_URL}/api/users/sign-up`, {

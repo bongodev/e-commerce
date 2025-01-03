@@ -8,7 +8,7 @@ import {
   Stack,
 } from '../../common/components';
 
-import { useProducts } from '../../api/queries';
+import { useProductDeleteQuery, useProductQuery } from '../../api/queries';
 
 import { ProductFrom, ProductTable } from '../../components';
 
@@ -21,14 +21,9 @@ const productPlaceholder = {
 };
 
 export const InventoryPage = () => {
-  const {
-    isLoading,
-    isSubmitting,
-    isDeleting,
-    upsertProduct,
-    deleteProduct,
-    products,
-  } = useProducts();
+  const { productQuery, productMutation } = useProductQuery();
+  const { productDeleteQuery } = useProductDeleteQuery();
+
   const [selectedProduct, setSelectedProduct] = useState(productPlaceholder);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
 
@@ -42,11 +37,15 @@ export const InventoryPage = () => {
   };
 
   const onSubmitProductFrom = (productPayload) => {
-    upsertProduct(productPayload).finally(() => closeProductForm());
+    productMutation
+      .mutateAsync(productPayload)
+      .finally(() => closeProductForm());
   };
 
   const handleProductDelete = (productId) => {
-    deleteProduct(productId).finally(() => setProductIdToDelete(null));
+    productDeleteQuery
+      .mutateAsync(productId)
+      .finally(() => setProductIdToDelete(null));
   };
 
   const shouldOpenEditForm = Boolean(selectedProduct.id);
@@ -57,8 +56,8 @@ export const InventoryPage = () => {
         <Button onClick={toggleProductFrom}>Add Product</Button>
       </Box>
       <ProductTable
-        isLoading={isLoading}
-        products={products}
+        isLoading={productQuery.isLoading}
+        products={productQuery.data || []}
         onSelectProduct={setSelectedProduct}
         onDeleteProduct={setProductIdToDelete}
       />
@@ -73,7 +72,7 @@ export const InventoryPage = () => {
         >
           <ProductFrom
             productPlaceholder={selectedProduct}
-            isSubmitting={isSubmitting}
+            isSubmitting={productMutation.isLoading}
             onSubmitProductFrom={onSubmitProductFrom}
           />
         </Box>
@@ -81,7 +80,7 @@ export const InventoryPage = () => {
 
       <ConfirmationModal
         open={Boolean(productIdToDelete)}
-        disabled={isDeleting}
+        disabled={productDeleteQuery.isLoading}
         onClose={() => setProductIdToDelete(null)}
         onConfirm={() => handleProductDelete(productIdToDelete)}
         title="Are you sure!"
