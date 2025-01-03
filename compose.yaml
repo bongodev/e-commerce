@@ -10,12 +10,22 @@
 services:
   server:
     build:
-      context: .
+      context: ./server
+    depends_on:
+      - e-commerce-mongo
     environment:
-      NODE_ENV: production
+      - PORT=5000
+      - ALLOWED_ORIGIN=http://localhost:3000
+      - MONGODB_URI=mongodb://e-commerce-mongo:27017/e-commerce
+      - JWT_SECRET=34uhhfid8u345bfdjfiu3446346y
     ports:
       - 5000:5000
 
+  e-commerce-mongo:
+    container_name: e-commerce-mongo
+    image: mongo
+    ports:
+      - 27017:27017
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the
