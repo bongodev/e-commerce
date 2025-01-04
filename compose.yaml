@@ -21,11 +21,22 @@ services:
     ports:
       - 5000:5000
 
+  client:
+    build:
+      context: ./client
+    environment:
+      - REACT_APP_BASE_URL=http://localhost:5000
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+
   e-commerce-mongo:
     container_name: e-commerce-mongo
     image: mongo
     ports:
       - 27017:27017
+
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the
