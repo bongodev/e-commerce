@@ -6,19 +6,19 @@ const ProductSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    description:{
-        type:String
-    },
-    madeIn:{
-        type:String
-    },
-    category:{
-        type:String
-    },
+    // description:{
+    //     type:String
+    // },
+    // madeIn:{
+    //     type:String
+    // },
+    // category:{
+    //     type:String
+    // },
     price:{
         type:Number
     },
-    pQty:{
+    quantity:{
         type:Number
     },
     isDeleted:{
@@ -29,10 +29,10 @@ const ProductSchema=new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:'User'
     },
-    fileId:{
-        type:mongoose.Types.ObjectId,
-        ref:'File'
-    }
+    // fileId:{
+    //     type:mongoose.Types.ObjectId,
+    //     ref:'File'
+    // }
 },{
     timestamps:true
 })
