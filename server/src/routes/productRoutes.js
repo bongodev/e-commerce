@@ -10,6 +10,7 @@ router.post("/", authenticateToken, async (req, res) => {
     const userId = req.user._id;
     const productObj = {
       name: req.body.name,
+      description: req.body.description,
       price: parseInt(req.body.price),
       userId: userId,
       quantity: parseInt(req.body.quantity),

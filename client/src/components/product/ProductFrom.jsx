@@ -52,6 +52,16 @@ export const ProductFrom = ({
           onChange={handleOnChange}
           value={product.name}
         />
+         <TextField
+         required
+      multiline
+      rows={4} 
+      label="Description"
+      name="description"
+      error={Boolean(error.description)}
+      onChange={handleOnChange}
+      value={product.description}
+    />
         <TextField
           required
           label="Price"

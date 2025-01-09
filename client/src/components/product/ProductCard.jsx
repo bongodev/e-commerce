@@ -14,10 +14,6 @@ import {
 
 import { CartContext } from '../../contexts';
 
-const mockDescription = ` In publishing and graphic design, Lorem ipsum is a placeholder text
-          commonly used to demonstrate the visual form of a document or a
-          typeface without relying on meaningful content. Lorem ipsum may be
-          used as a placeholder before the final copy is available. Wikipedia`;
 
 export function ProductCard({ product }) {
   const { addProductToCart } = useContext(CartContext);
@@ -43,9 +39,9 @@ export function ProductCard({ product }) {
 
           <Typography variant="h5">${product.price}</Typography>
         </Box>
-        <Tooltip title={mockDescription}>
+        <Tooltip title={product.description}>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {mockDescription}
+          {product.description}
           </Typography>
         </Tooltip>
       </CardContent>
