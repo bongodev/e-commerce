@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 
-import { AddBoxIcon } from '../../common/icons';
+import { AddBoxIcon } from "../../common/icons";
 import {
   Box,
   Button,
@@ -10,10 +10,9 @@ import {
   CardMedia,
   Tooltip,
   Typography,
-} from '../../common/components';
+} from "../../common/components";
 
-import { CartContext } from '../../contexts';
-
+import { CartContext } from "../../contexts";
 
 export function ProductCard({ product }) {
   const { addProductToCart } = useContext(CartContext);
@@ -40,8 +39,8 @@ export function ProductCard({ product }) {
           <Typography variant="h5">${product.price}</Typography>
         </Box>
         <Tooltip title={product.description}>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {product.description}
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {product.description}
           </Typography>
         </Tooltip>
       </CardContent>

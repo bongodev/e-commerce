@@ -26,10 +26,10 @@ const ProductSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
-    // fileId:{
-    //     type:mongoose.Types.ObjectId,
-    //     ref:'File'
-    // }
+    fileId:{
+        type:mongoose.Types.ObjectId,
+        ref:'File'
+    }
   },
   {
     timestamps: true,

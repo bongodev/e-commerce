@@ -1,8 +1,45 @@
 import express from "express";
-import { Product } from "../models/index.js";
+import { Product, File } from "../models/index.js";
 import { authenticateToken } from "../middlewares/index.js";
+import multer from "multer";
+import path from "path";
+
 
 const router = express.Router();
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadPath = path.resolve("src/public/uploads");
+    console.log("Saving file to:", uploadPath); // Debugging log
+    cb(null, uploadPath);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
+
+//upload product image
+router.post(
+  "/uploads",
+  [authenticateToken, upload.single("file")],
+  async (req, res) => {
+    try {
+      const fileObj = {
+        name: req.file.filename,
+        path: req.file.path,
+      };
+
+      const file = new File(fileObj);
+      await file.save();
+      return res.json(file);
+    } catch (error) {
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  }
+);
 
 //create product
 router.post("/", authenticateToken, async (req, res) => {

@@ -1,7 +1,6 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
 import { appConfig } from "../config/appConfig.js";
 
 import { User } from "../models/index.js";
