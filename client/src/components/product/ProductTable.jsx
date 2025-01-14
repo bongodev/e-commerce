@@ -3,8 +3,8 @@ import {
   IconButton,
   Table,
   TableEmptyState,
-} from '../../common/components';
-import { DeleteIcon, EditIcon, SettingsIcon } from '../../common/icons';
+} from "../../common/components";
+import { DeleteIcon, EditIcon, SettingsIcon } from "../../common/icons";
 
 const ProductRowActions = ({ product, onSelectProduct, onDeleteProduct }) => {
   return (
@@ -31,7 +31,7 @@ export const ProductTable = ({
 }) => {
   const getFormattedRows = () =>
     products.map((product) => ({
-      id: product.id,
+      id: product._id,
       name: product.name,
       price: product.price,
       quantity: product.quantity,
@@ -43,29 +43,29 @@ export const ProductTable = ({
       <Table
         columns={[
           {
-            field: 'name',
-            headerName: 'Product Name',
+            field: "name",
+            headerName: "Product Name",
             flex: 1,
           },
           {
-            field: 'price',
-            headerName: 'Price',
-            headerAlign: 'center',
-            type: 'number',
+            field: "price",
+            headerName: "Price",
+            headerAlign: "center",
+            type: "number",
             width: 150,
-            valueFormatter: (value) => `$${value}`,
+            valueFormatter: (value) => `$${value.toFixed(2)}`,
           },
           {
-            field: 'quantity',
-            headerName: 'Quantity',
-            headerAlign: 'center',
+            field: "quantity",
+            headerName: "Quantity",
+            headerAlign: "center",
             width: 150,
-            type: 'number',
+            type: "number",
           },
           {
-            align: 'center',
-            field: 'actions',
-            headerAlign: 'center',
+            align: "center",
+            field: "actions",
+            headerAlign: "center",
             minWidth: 200,
             renderCell: ({ row }) => (
               <ProductRowActions
@@ -90,7 +90,7 @@ export const ProductTable = ({
         }}
         sx={{
           minHeight: 400,
-          '& .MuiDataGrid-columnHeaderTitle': {
+          "& .MuiDataGrid-columnHeaderTitle": {
             fontWeight: 700,
           },
         }}

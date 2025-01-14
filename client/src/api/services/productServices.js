@@ -3,8 +3,9 @@ import { http } from '../../common/http';
 export const getProducts = async () => {
   try {
     const response = await http.get('/api/products');
+    console.log("Products:", response.data);
     return response.data;
-  } catch (error) {
+  }catch (error) {
     console.log(error);
   }
 };
