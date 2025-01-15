@@ -25,7 +25,8 @@ export function ProductCard({ product }) {
     <Card sx={{ maxWidth: 300 }}>
       <CardMedia
         sx={{ height: 140, width: 300 }}
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dyT8FEm-Khi_NBX4-sYdtIUo8EOmxe62eQ&s"
+        //image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dyT8FEm-Khi_NBX4-sYdtIUo8EOmxe62eQ&s"
+        image={product.photo}
         title={product.name}
       />
       <CardContent sx={{ height: 200 }}>

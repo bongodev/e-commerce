@@ -44,12 +44,16 @@ router.post(
 //create product
 router.post("/", authenticateToken, async (req, res) => {
   try {
+
+   
     const userId = req.user._id;
+
     const productObj = {
       name: req.body.name,
       description: req.body.description,
       price: parseInt(req.body.price),
       userId: userId,
+      fileId: req.body.fileId,
       quantity: parseInt(req.body.quantity),
       isDeleted: false,
     };
@@ -160,7 +164,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
 router.delete("/:id", authenticateToken, async (req, res) => {
   try {
     const id = req.params.id;
-    const amendProduct = await Product.findByIdAndUpdate(
+    const amendProduct = await Product.findByIdAndDelete(
       id,
       { isDeleted: true },
       { new: true }
