@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 
-import { AddBoxIcon } from '../../common/icons';
+import { AddBoxIcon } from "../../common/icons";
 import {
   Box,
   Button,
@@ -10,14 +10,9 @@ import {
   CardMedia,
   Tooltip,
   Typography,
-} from '../../common/components';
+} from "../../common/components";
 
-import { CartContext } from '../../contexts';
-
-const mockDescription = ` In publishing and graphic design, Lorem ipsum is a placeholder text
-          commonly used to demonstrate the visual form of a document or a
-          typeface without relying on meaningful content. Lorem ipsum may be
-          used as a placeholder before the final copy is available. Wikipedia`;
+import { CartContext } from "../../contexts";
 
 export function ProductCard({ product }) {
   const { addProductToCart } = useContext(CartContext);
@@ -30,7 +25,8 @@ export function ProductCard({ product }) {
     <Card sx={{ maxWidth: 300 }}>
       <CardMedia
         sx={{ height: 140, width: 300 }}
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dyT8FEm-Khi_NBX4-sYdtIUo8EOmxe62eQ&s"
+        //image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5dyT8FEm-Khi_NBX4-sYdtIUo8EOmxe62eQ&s"
+        image={product.photo}
         title={product.name}
       />
       <CardContent sx={{ height: 200 }}>
@@ -43,9 +39,9 @@ export function ProductCard({ product }) {
 
           <Typography variant="h5">${product.price}</Typography>
         </Box>
-        <Tooltip title={mockDescription}>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {mockDescription}
+        <Tooltip title={product.description}>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {product.description}
           </Typography>
         </Tooltip>
       </CardContent>
