@@ -8,22 +8,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
 # Copy the rest of the application files
 COPY . .
 
-# Build the React application
-RUN npm run build
-
-# Use Nginx to serve the built application
-FROM nginx:stable-alpine
-
-# Copy the build folder to the Nginx HTML folder
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
-
-# Expose the port Nginx will run on
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
