@@ -1,0 +1,49 @@
+services:
+  server:
+    build:
+      context: ./server
+    depends_on:
+      - e-commerce-mongo
+    environment:
+      - PORT=5000
+      - ALLOWED_ORIGIN=http://localhost:3000
+      - MONGODB_URI=mongodb://e-commerce-mongo:27017/e-commerce
+      - JWT_SECRET=34uhhfid8u345bfdjfiu3446346y
+    ports:
+      - 5000:5000
+
+  client:
+    build:
+      context: ./client
+    environment:
+      - REACT_APP_BASE_URL=http://localhost:5000
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+
+  e-commerce-mongo:
+    container_name: e-commerce-mongo
+    image: mongo
+    ports:
+      - 27017:27017
+
+  e-commerce-client-prod:
+    build:
+      context: client
+      dockerfile: Dockerfile.production
+    depends_on:
+      - e-commerce-server-prod
+    ports:
+      - 80:80
+
+  e-commerce-server-prod:
+    build:
+      context: server
+      dockerfile: Dockerfile.production
+    ports:
+      - 5000:5000
+    environment:
+      - PORT=5000
+      - MONGODB_URI=<MONGODB_URI>
+      - JWT_SECRET=34uhhfid8u345bfdjfiu3446346y#$
