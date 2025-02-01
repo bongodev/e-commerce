@@ -13,9 +13,13 @@ connectDB();
 
 app.use(bodyParser.json());
 app.use(
-  cors({
-    origin: appConfig.ALLOWED_ORIGIN,
-  })
+  cors(
+    process.env.NODE_ENV === 'production'
+      ? {}
+      : {
+          origin: appConfig.ALLOWED_ORIGIN,
+        }
+  )
 );
 
 configureRoutes(app);
