@@ -1,8 +1,8 @@
-import { useProductQuery } from '../../api/queries';
+import { useProductQuery } from "../../api/queries";
 
-import { Box, Loading } from '../../common/components';
+import { Box, Loading } from "../../common/components";
 
-import { ProductCard } from './ProductCard';
+import { ProductCard } from "./ProductCard";
 
 export function Products() {
   const { productQuery } = useProductQuery();
@@ -10,7 +10,7 @@ export function Products() {
   console.log(productQuery.data);
 
   return (
-    <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+    <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
       {productQuery.isLoading ? (
         <Loading />
       ) : (
@@ -21,3 +21,4 @@ export function Products() {
     </Box>
   );
 }
+

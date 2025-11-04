@@ -1,16 +1,15 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import express from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { appConfig } from "../config/appConfig.js";
 
-import { appConfig } from '../config/appConfig.js';
-
-import { User } from '../models/index.js';
-import { authenticateToken } from '../middlewares/index.js';
+import { User } from "../models/index.js";
+import { authenticateToken } from "../middlewares/index.js";
 
 const router = express.Router();
 
 //? Create a user
-router.post('/sign-up', async (req, res) => {
+router.post("/sign-up", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
@@ -24,76 +23,76 @@ router.post('/sign-up', async (req, res) => {
     await user.save();
     res.status(201).json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message || 'Something went wrong' });
+    res.status(500).json({ message: error.message || "Something went wrong" });
   }
 });
 
 //? Login a user
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { type, email, password, refreshToken } = req.body;
-    if (type == 'email') {
+    if (type == "email") {
       const user = await User.findOne({ email: email });
       if (!user) {
-        res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: "User not found" });
       } else {
         await handleEmailLogin(password, user, res);
       }
     } else {
       //? Login using refresh token
       if (!refreshToken) {
-        res.status(401).json({ message: 'Refresh token is not defined' });
+        res.status(401).json({ message: "Refresh token is not defined" });
       } else {
         handleRefreshToken(refreshToken, res);
       }
     }
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
 //? Get all user
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await User.find({});
     res.json(users);
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
 //? Get user profile
-router.get('/profile', authenticateToken, async (req, res) => {
+router.get("/profile", authenticateToken, async (req, res) => {
   try {
     const id = req.user._id;
     const user = await User.findById(id);
     if (user) {
       res.json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
 //? Get one user
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
     if (user) {
       res.json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
 //? Update one user
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const userBody = req.body;
@@ -103,25 +102,25 @@ router.put('/:id', async (req, res) => {
     if (updateUser) {
       res.json(updateUser);
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
 //? Delete one user
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const deleteUser = await User.findByIdAndDelete(id);
     if (deleteUser) {
-      res.json({ message: 'User is deleted' });
+      res.json({ message: "User is deleted" });
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
@@ -132,14 +131,14 @@ async function handleEmailLogin(password, user, res) {
     res.json(userObj);
     //todo
   } else {
-    res.status(401).json({ message: 'Unable to Login' });
+    res.status(401).json({ message: "Unable to Login" });
   }
 }
 
 function handleRefreshToken(refreshToken, res) {
   jwt.verify(refreshToken, appConfig.AUTH.JWT_SECRET, async (err, payload) => {
     if (err) {
-      res.status(401).json({ message: 'Unauthorized' });
+      res.status(401).json({ message: "Unauthorized" });
       return;
     } else {
       const user = await User.findById(payload._id);
@@ -147,7 +146,7 @@ function handleRefreshToken(refreshToken, res) {
         const userObj = generateUserObject(user);
         res.json(userObj);
       } else {
-        res.status(401).json({ message: 'Unauthorized' });
+        res.status(401).json({ message: "Unauthorized" });
       }
     }
   });
@@ -158,8 +157,8 @@ function generateUserObject(user) {
 
   const userObj = user.toJSON();
   delete userObj.password;
-  userObj['accessToken'] = accessToken;
-  userObj['refreshToken'] = refreshToken;
+  userObj["accessToken"] = accessToken;
+  userObj["refreshToken"] = refreshToken;
   return userObj;
 }
 
@@ -171,7 +170,7 @@ function generateTokens(user) {
     },
     appConfig.AUTH.JWT_SECRET,
     {
-      expiresIn: '5m',
+      expiresIn: "5m",
     }
   );
   const refreshToken = jwt.sign(
@@ -181,7 +180,7 @@ function generateTokens(user) {
     },
     appConfig.AUTH.JWT_SECRET,
     {
-      expiresIn: '7d',
+      expiresIn: "7d",
     }
   );
   return { accessToken, refreshToken };

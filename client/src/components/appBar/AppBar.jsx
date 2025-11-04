@@ -5,6 +5,7 @@ import {
   AppBar as MUIAppBar,
   Toolbar,
 } from '../../common/components';
+import { Link } from 'react-router-dom';
 import { CartMenu } from './CartMenu';
 import { MobileMenus } from './MobileMenus';
 import { ProfileMenu } from './ProfileMenu';
@@ -32,10 +33,10 @@ export const AppBar = () => {
             display={{ sm: 'none', xs: 'none', md: 'flex', lg: 'flex' }}
             gap={2}
           >
-            <Button href="/" color="inherit">
+            <Button component={Link} to="/" color="inherit">
               Home
             </Button>
-            <Button href="/contacts" color="inherit">
+            <Button component={Link} to="/contacts" color="inherit">
               Contacts
             </Button>
           </Box>
